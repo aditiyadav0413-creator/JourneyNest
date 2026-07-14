@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Book Now</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='book.css') }}">
+</head>
+
+<body>
+
+    <section class="book" id="book">
+        <h1 class="heading">
+            <span>B</span>
+            <span>O</span>
+            <span>O</span>
+            <span>K</span>
+            <span class="space"></span>
+            <span>N</span>
+            <span>O</span>
+            <span>W</span>
+        </h1>
+
+        <div class="row">
+            <div class="image">
+                <img src="{{ url_for('static', filename='images/booking/book-img.jpg') }}" alt="Booking Image">
+            </div>
+
+            <form id="bookingForm" action="/book-now" method="POST">
+                <div class="inputBox">
+                    <h3>From Where</h3>
+                    <div class="autocomplete-container">
+                        <input type="text" id="from-place" name="from_place" placeholder="City or Airport" required autocomplete="off">
+                        <div class="autocomplete-results" id="from-results"></div>
+                    </div>
+                </div>
+                <div class="inputBox">
+                    <h3>Where To</h3>
+                    <div class="autocomplete-container">
+                        <input type="text" id="to-place" name="to_place" placeholder="City or Airport" required autocomplete="off">
+                        <div class="autocomplete-results" id="to-results"></div>
+                    </div>
+                </div>
+                <div class="inputBox">
+                    <h3>How Many</h3>
+                    <input type="number" id="guests" name="guests" placeholder="number of guests" min="1" required>
+                </div>
+                <div class="inputBox">
+                    <h3>Arrivals</h3>
+                    <input type="date" id="arrival" name="arrival" required>
+                </div>
+                <div class="inputBox">
+                    <h3>Leaving</h3>
+                    <input type="date" id="leaving" name="leaving" required>
+                </div>
+                <input type="submit" class="btn" value="Book Now">
+            </form>
+        </div>
+    </section>
+
+    <div class="intro-text">
+        <p>Planning your next getaway? Just a few clicks away from your dream destination. Fill in your details above and let us handle the rest.</p>
+    </div>
+    <div class="scroll-down">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <section class="testimonials">
+        <h2>What Our Travelers Say</h2>
+        <div class="carousel">
+            <img src="{{ url_for('static', filename='images/booking/traveler1.jpg') }}" alt="Happy traveler">
+            <img src="{{ url_for('static', filename='images/booking/traveler2.jpg') }}" alt="Happy traveler">
+            <img src="{{ url_for('static', filename='images/booking/traveler3.jpg') }}" alt="Happy traveler">
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const fromInput = document.getElementById('from-place');
+            const toInput = document.getElementById('to-place');
+            const fromResults = document.getElementById('from-results');
+            const toResults = document.getElementById('to-results');
+            
+            let airportData = [];
+
+            // ✅ CORRECTED PATH TO airports.json
+            fetch("{{ url_for('static', filename='airports.json') }}")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}. Failed to fetch airports.json.`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (!Array.isArray(data)) {
+                        throw new Error("JSON data is not an array. Check the file format.");
+                    }
+                    airportData = data;
+                    console.log(`${airportData.length} airports loaded successfully.`);
+                })
+                .catch(error => {
+                    console.error('CRITICAL ERROR:', error);
+                    alert("Could not load airport data. Please check the browser's F12 Developer Console for errors.");
+                    fromInput.placeholder = "Airport data failed to load";
+                    toInput.placeholder = "Airport data failed to load";
+                    fromInput.disabled = true;
+                    toInput.disabled = true;
+                });
+
+            const handleAirportSearch = (event) => {
+                const input = event.target;
+                const resultsContainer = input.id === 'from-place' ? fromResults : toResults;
+                const query = input.value.toLowerCase().trim();
+
+                if (query.length < 2) {
+                    resultsContainer.style.display = 'none';
+                    return;
+                }
+
+                const filtered = airportData.filter(airport => {
+                    const nameMatch = airport.name && airport.name.toLowerCase().includes(query);
+                    const cityMatch = airport.city && airport.city.toLowerCase().includes(query);
+                    const iataMatch = airport.iata && airport.iata.toLowerCase().includes(query);
+                    return nameMatch || cityMatch || iataMatch;
+                });
+
+                const sorted = filtered.sort((a, b) => {
+                    const aIataMatch = a.iata && a.iata.toLowerCase() === query;
+                    const bIataMatch = b.iata && b.iata.toLowerCase() === query;
+                    const aStartsWith = (a.name && a.name.toLowerCase().startsWith(query)) || (a.city && a.city.toLowerCase().startsWith(query));
+                    const bStartsWith = (b.name && b.name.toLowerCase().startsWith(query)) || (b.city && b.city.toLowerCase().startsWith(query));
+
+                    if (aIataMatch && !bIataMatch) return -1;
+                    if (!aIataMatch && bIataMatch) return 1;
+                    if (aStartsWith && !bStartsWith) return -1;
+                    if (!aStartsWith && bStartsWith) return 1;
+                    return 0;
+                });
+
+                resultsContainer.innerHTML = '';
+                if (sorted.length > 0) {
+                    sorted.slice(0, 6).forEach(airport => {
+                        const item = document.createElement('div');
+                        item.className = 'autocomplete-item';
+                        
+                        const iataDisplay = airport.iata ? `(${airport.iata})` : '';
+                        item.innerHTML = `<strong>${airport.name}</strong> ${iataDisplay}<br><small>${airport.city || ''}</small>`;
+                        
+                        item.addEventListener('click', () => {
+                            input.value = `${airport.name} ${iataDisplay}`;
+                            resultsContainer.style.display = 'none';
+                        });
+                        resultsContainer.appendChild(item);
+                    });
+                    resultsContainer.style.display = 'block';
+                } else {
+                    resultsContainer.innerHTML = '<div class="autocomplete-item-none">No airports found</div>';
+                    resultsContainer.style.display = 'block';
+                }
+            };
+
+            fromInput.addEventListener('input', handleAirportSearch);
+            toInput.addEventListener('input', handleAirportSearch);
+            
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.autocomplete-container')) {
+                    fromResults.style.display = 'none';
+                    toResults.style.display = 'none';
+                }
+            });
+
+            const bookingForm = document.getElementById("bookingForm");
+            bookingForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                fetch('/book-now', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => response.json())
+                .then(data => {
+                    alert('✅ ' + data.message);
+                    this.reset();
+                }).catch(error => {
+                    console.error('Error:', error);
+                    alert('❌ Oops! Something went wrong.');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

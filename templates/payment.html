@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Booking - JourneyNest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        /* --- General Styles --- */
+        :root {
+            --orange: #ffa500;
+            --orange-light: rgba(255, 165, 0, 0.15);
+            --grey-light: #f7f7f7;
+            --grey-border: #e0e0e0;
+            --text-dark: #333;
+            --text-light: #666;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--grey-light);
+            padding: 4rem 1rem;
+        }
+
+        /* --- Main Layout Container --- */
+        .payment-page-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        /* --- Summary Column --- */
+        .summary-column {
+            flex: 1;
+            min-width: 320px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+            border: 1px solid var(--grey-border);
+        }
+
+        .summary-column h3 {
+            font-size: 22px;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--grey-border);
+        }
+
+        .summary-column .detail-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+            color: var(--text-light);
+            padding: 12px 0;
+        }
+        
+        .summary-column .detail-item strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .summary-column .total-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--orange);
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--grey-border);
+        }
+
+        /* --- Payment Method Column --- */
+        .method-column {
+            flex: 1.5;
+            min-width: 320px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+            border: 1px solid var(--grey-border);
+        }
+
+        .method-column h3 {
+             font-size: 22px;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+        }
+
+        .payment-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--grey-border);
+            margin-bottom: 30px;
+        }
+
+        .payment-tab {
+            padding: 14px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: all 0.2s ease-in-out;
+            margin-bottom: -1px; /* Aligns border with the bottom line */
+        }
+        
+        .payment-tab i {
+            margin-right: 8px;
+        }
+
+        .payment-tab.active {
+            color: var(--orange);
+            border-bottom-color: var(--orange);
+        }
+
+        .payment-panel { display: none; }
+        .payment-panel.active { display: block; }
+        
+        /* --- Nicer Form Styling --- */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .payment-panel label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .payment-panel input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--grey-border);
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .payment-panel input:focus {
+            border-color: var(--orange);
+            outline: none;
+            box-shadow: 0 0 0 3px var(--orange-light);
+        }
+
+        .card-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* --- Pay Button --- */
+        .pay-button {
+            width: 100%;
+            padding: 16px;
+            margin-top: 15px;
+            background-color: var(--orange);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .pay-button:hover {
+            background-color: #e69500;
+            transform: translateY(-2px);
+        }
+        
+        /* --- UPI Panel Content --- */
+        .upi-content {
+            text-align: center;
+            padding: 1rem 0;
+        }
+        
+        .upi-content p {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="payment-page-container">
+        <div class="summary-column" id="booking-summary">
+            <h3>Booking Summary</h3>
+            <p>Loading your trip details...</p>
+        </div>
+        
+        <div class="method-column">
+            <h3>Choose a Payment Method</h3>
+            <div class="payment-tabs">
+                <div class="payment-tab active" data-target="credit-card-panel"><i class="fas fa-credit-card"></i>Credit Card</div>
+                <div class="payment-tab" data-target="upi-panel"><i class="fab fa-google-pay"></i>UPI / QR</div>
+            </div>
+
+            <div id="credit-card-panel" class="payment-panel active">
+                <form action="/process_payment" method="POST">
+                    <input type="hidden" id="form-destination" name="destination">
+                    <input type="hidden" id="form-source" name="source">
+                    <input type="hidden" id="form-date" name="date">
+                    <input type="hidden" id="form-guests" name="guests">
+                    <input type="hidden" id="form-price" name="price">
+                    
+                    <div class="form-group">
+                        <label for="cardholder_name">Cardholder Name</label>
+                        <input type="text" id="cardholder_name" name="cardholder_name" placeholder="Adii Yadav" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="card_number">Card Number</label>
+                        <input type="text" id="card_number" name="card_number" placeholder="4242 4242 4242 4242" required>
+                    </div>
+
+                    <div class="card-form-grid">
+                        <div class="form-group">
+                           <label for="expiry_date">Expiry Date</label>
+                           <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group">
+                           <label for="cvv">CVV</label>
+                           <input type="text" id="cvv" name="cvv" placeholder="123" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="pay-button">Pay Now & Confirm Booking</button>
+                </form>
+            </div>
+
+            <div id="upi-panel" class="payment-panel">
+               <div class="upi-content">
+                    <p>Scan with any UPI app like Google Pay, PhonePe, etc.</p>
+                    <p>After paying, click below to confirm your booking.</p>
+                    <form action="/process_payment" method="POST">
+                         <input type="hidden" id="upi-destination" name="destination">
+                         <input type="hidden" id="upi-source" name="source">
+                         <input type="hidden" id="upi-date" name="date">
+                         <input type="hidden" id="upi-guests" name="guests">
+                         <input type="hidden" id="upi-price" name="price">
+                         <input type="hidden" name="cardholder_name" value="UPI Payment">
+                         <button type="submit" class="pay-button">I have paid, Confirm Booking</button>
+                    </form>
+               </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Payment Tab Switching Logic ---
+            const paymentTabs = document.querySelectorAll('.payment-tab');
+            const paymentPanels = document.querySelectorAll('.payment-panel');
+
+            paymentTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    paymentTabs.forEach(t => t.classList.remove('active'));
+                    paymentPanels.forEach(p => p.classList.remove('active'));
+
+                    tab.classList.add('active');
+                    const targetPanelId = tab.getAttribute('data-target');
+                    document.getElementById(targetPanelId).classList.add('active');
+                });
+            });
+
+            // --- Booking Summary Population Logic ---
+            const summaryElement = document.getElementById('booking-summary');
+            const params = new URLSearchParams(window.location.search);
+
+            const destination = params.get('destination') || 'Not selected';
+            const source = params.get('source') || 'Not selected';
+            const date = params.get('date') || 'Not selected';
+            const guests = params.get('guests') || '0';
+            const price = parseFloat(params.get('price')) || 0;
+
+            if (destination !== 'Not selected') {
+                // Display summary details
+                summaryElement.innerHTML = `
+                    <h3>Booking Summary</h3>
+                    <div class="detail-item"><span>Package:</span> <strong>Trip to ${destination}</strong></div>
+                    <div class="detail-item"><span>From:</span> <strong>${source}</strong></div>
+                    <div class="detail-item"><span>Date:</span> <strong>${date}</strong></div>
+                    <div class="detail-item"><span>Guests:</span> <strong>${guests}</strong></div>
+                    <div class="total-price">
+                        <span>Total:</span>
+                        <span>₹${price.toLocaleString('en-IN')}</span>
+                    </div>
+                `;
+                
+                // Set hidden form input values for both forms
+                document.getElementById('form-destination').value = destination;
+                document.getElementById('form-source').value = source;
+                document.getElementById('form-date').value = date;
+                document.getElementById('form-guests').value = guests;
+                document.getElementById('form-price').value = price;
+
+                document.getElementById('upi-destination').value = destination;
+                document.getElementById('upi-source').value = source;
+                document.getElementById('upi-date').value = date;
+                document.getElementById('upi-guests').value = guests;
+                document.getElementById('upi-price').value = price;
+            }
+        });
+    </script>
+</body>
+</html>

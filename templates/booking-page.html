@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Details</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        .details-section {
+            padding: 8rem 9%;
+            background-color: #f7f7f7;
+            text-align: center;
+        }
+
+        .details-section .content {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+
+        .details-section h1 {
+            color: var(--orange);
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+
+        .details-section p#destination-details {
+            font-size: 1.6rem;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            padding: 0 2rem;
+            font-style: italic;
+            border-left: 4px solid var(--orange);
+        }
+
+        h2 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-grid .image-box:nth-child(4),
+        .gallery-grid .image-box:nth-child(5) {
+            grid-column: span 1.5;
+        }
+
+        .gallery-grid .image-box:nth-child(4) {
+            margin-left: auto;
+        }
+
+        .gallery-grid .image-box:nth-child(5) {
+            margin-right: auto;
+        }
+
+        .gallery-grid .image-box {
+            position: relative;
+            width: 100%;
+            padding-top: 75%;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-grid .image-box img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .form-container {
+            margin-top: 3rem;
+        }
+
+        .form-container h3 {
+            color: var(--orange);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .inputBox {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.3rem;
+            flex-wrap: wrap;
+        }
+
+        .inputBox input {
+            flex: 1 1 48%;
+            padding: 1rem 1.2rem;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+        }
+
+        .btn-proceed {
+            background: var(--orange);
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.6rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="details-section">
+        <h1 id="destination-heading"></h1>
+        <div class="content">
+            <p id="destination-details"></p>
+            <h2>Photo Gallery</h2>
+            <div class="gallery-grid" id="destination-gallery"></div>
+            <div class="form-container">
+                <form id="bookingForm">
+                    <h3>Booking Details</h3>
+                    <div class="inputBox">
+                        <input type="text" id="source" placeholder="Source (e.g., Delhi)" required>
+                        <input type="text" id="travel-date" onfocus="(this.type='date')" onblur="(this.type='text')"
+                            placeholder="Travel Date" required>
+                    </div>
+                    <div class="inputBox">
+                        <input type="number" id="guests" placeholder="Number of Guests" min="1" required>
+                    </div>
+                    <button type="submit" class="btn-proceed">Proceed to Payment</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const destination = params.get('destination');
+
+            // ✅ CORRECTED IMAGE PATHS INSIDE JAVASCRIPT
+            const destinations = {
+                'mumbai': {
+                    name: 'Mumbai',
+                    details: 'Explore Mumbai\'s vibrant street life, historic architecture, and Bollywood glamour in India\'s bustling financial capital.',
+                    images: [
+                        "{{ url_for('static', filename='images/package/m1.jpeg') }}",
+                        "{{ url_for('static', filename='images/package/m2.jpg') }}",
+                        "{{ url_for('static', filename='images/package/m3.jpg') }}",
+                        "{{ url_for('static', filename='images/package/m4.webp') }}",
+                        "{{ url_for('static', filename='images/package/m5.jpg') }}"
+                    ],
+                },
+                'sydney': {
+                    name: 'Sydney',
+                    details: 'Discover Sydney\'s iconic Opera House, stunning beaches, and rich cultural experiences in this beautiful Australian city.',
+                    images: [
+                        "{{ url_for('static', filename='images/package/s1.jpeg') }}",
+                        "{{ url_for('static', filename='images/package/s2.jpg') }}",
+                        "{{ url_for('static', filename='images/package/s3.jpg') }}",
+                        "{{ url_for('static', filename='images/package/s4.jpeg') }}",
+                        "{{ url_for('static', filename='images/package/s5.jpg') }}"
+                    ],
+                },
+                'bali': {
+                    name: 'Bali',
+                    details: 'Discover Bali\'s stunning beaches, vibrant rice terraces, and ancient temples. Find your serene escape or exhilarating adventure on this Indonesian paradise island.',
+                    images: [
+                        "{{ url_for('static', filename='images/package/b1.avif') }}",
+                        "{{ url_for('static', filename='images/package/b2.jpg') }}",
+                        "{{ url_for('static', filename='images/package/b3.jpg') }}",
+                        "{{ url_for('static', filename='images/package/b4.jpg') }}",
+                        "{{ url_for('static', filename='images/package/b5.jpg') }}"
+                    ]
+                },
+                'paris': {
+                    name: 'paris',
+                    details: 'Experience romance and elegance in Paris with its world-famous Eiffel Tower, art museums, and charming cafés.',
+                    images: [
+                        "{{ url_for('static', filename='images/package/pa1.jpeg') }}",
+                        "{{ url_for('static', filename='images/package/pa2.jpeg') }}",
+                        "{{ url_for('static', filename='images/package/pa3.jpg') }}",
+                        "{{ url_for('static', filename='images/package/pa4.jpg') }}",
+                        "{{ url_for('static', filename='images/package/pa5.jpeg') }}"
+                    ]
+                },
+                'tokyo': {
+                    name: 'Tokyo',
+                    details: 'Enjoy Tokyo\'s mix of tradition and technology, from ancient temples to neon-lit streets.',
+                    images: [
+                        "{{ url_for('static', filename='images/package/t1.jpeg') }}",
+                        "{{ url_for('static', filename='images/package/t2.jpg') }}",
+                        "{{ url_for('static', filename='images/package/t3.jpg') }}",
+                        "{{ url_for('static', filename='images/package/t4.webp') }}",
+                        "{{ url_for('static', filename='images/package/t5.jpg') }}"
+                    ],
+                },
+                'egypt': {
+                    name: 'Egypt',
+                    details: 'Uncover ancient wonders in Egypt, from the majestic pyramids of Giza to the vibrant bazaars of Cairo.',
+                    images: [
+                        "{{ url_for('static', filename='images/package/e1.jpeg') }}",
+                        "{{ url_for('static', filename='images/package/e2.jpeg') }}",
+                        "{{ url_for('static', filename='images/package/e3.jpg') }}",
+                        "{{ url_for('static', filename='images/package/e4.jpeg') }}",
+                        "{{ url_for('static', filename='images/package/e5.jpg') }}"
+                    ],
+                },
+                'bali': {
+                    name: 'Bali',
+                    details: 'Discover Bali\'s stunning beaches, vibrant rice terraces, and ancient temples on this paradise island.',
+                    images: [
+                        "{{ url_for('static', filename='images/package/b1.avif') }}",
+                        "{{ url_for('static', filename='images/package/b2.jpg') }}",
+                        "{{ url_for('static', filename='images/package/b3.jpg') }}",
+                        "{{ url_for('static', filename='images/package/b4.jpg') }}",
+                        "{{ url_for('static', filename='images/package/b5.jpg') }}"
+                    ],
+                },
+                'london': {
+                    name: 'London',
+                    details: 'Explore London’s historic charm featuring Big Ben, red buses, and world-class museums.',
+                    images: [
+                        "{{ url_for('static', filename='images/package/L1.jpg') }}",
+                        "{{ url_for('static', filename='images/package/L3.jpeg') }}",
+                        "{{ url_for('static', filename='images/package/L3.jpg') }}",
+                        "{{ url_for('static', filename='images/package/L4.jpg') }}",
+                        "{{ url_for('static', filename='images/package/L5.jpg') }}"
+                    ],
+                },
+                'agra': {
+                    name: 'Agra',
+                    details: 'Visit Agra to witness the majestic Taj Mahal, a symbol of love and architectural marvel.',
+                    images: [
+                        "{{ url_for('static', filename='images/package/A1.jpg') }}",
+                        "{{ url_for('static', filename='images/package/A2.jpg') }}",
+                        "{{ url_for('static', filename='images/package/A3.jpeg') }}",
+                        "{{ url_for('static', filename='images/package/A4.jpg') }}",
+                        "{{ url_for('static', filename='images/package/A5.jpg') }}"
+                    ],
+                },
+                'tropical-escape': {
+                    name: 'Tropical Escape',
+                    details: 'Relax on pristine white sand beaches with crystal-clear waters and stunning rock formations.',
+                    images: [
+                        "{{ url_for('static', filename='images/package/TE1.jpeg') }}",
+                        "{{ url_for('static', filename='images/package/TE2.jpeg') }}",
+                        "{{ url_for('static', filename='images/package/TE3.jpg') }}",
+                        "{{ url_for('static', filename='images/package/TE4.jpg') }}",
+                        "{{ url_for('static', filename='images/package/TE5.webp') }}"
+                    ],
+                }
+
+                // Add other destinations here with corrected paths...
+            };
+
+            if (destination && destinations[destination]) {
+                const data = destinations[destination];
+                document.getElementById('destination-heading').textContent = `Book Your Trip To ${data.name}`;
+                document.getElementById('destination-details').textContent = data.details;
+
+                const galleryElement = document.getElementById('destination-gallery');
+                data.images.forEach(imgUrl => {
+                    const imgContainer = document.createElement('div');
+                    imgContainer.classList.add('image-box');
+                    const img = document.createElement('img');
+                    img.src = imgUrl;
+                    img.alt = `Image of ${data.name}`;
+                    imgContainer.appendChild(img);
+                    galleryElement.appendChild(imgContainer);
+                });
+            } else {
+                document.getElementById('destination-heading').textContent = 'Destination Not Found';
+                document.getElementById('destination-details').textContent = 'Please select a valid destination from the packages page.';
+            }
+
+            // --- THIS IS THE NEW CODE TO ADD ---
+            document.getElementById('bookingForm').addEventListener('submit', (e) => {
+                e.preventDefault(); // Prevent the form from submitting the old way
+
+                // Get the values from the input fields
+                const source = document.getElementById('source').value;
+                const travelDate = document.getElementById('travel-date').value;
+                const guests = document.getElementById('guests').value;
+
+                // We also need the price, let's grab it from the packages page logic (or set a default)
+                // For now, let's get it from the original packages data if possible. 
+                // This is a simple example; you can make it more dynamic later.
+                const prices = {
+                    'mumbai': '7500', 'sydney': '15000', 'hawaii': '18000',
+                    'paris': '20000', 'tokyo': '16500', 'egypt': '22000',
+                    'bali': '15000', 'london': '24000', 'agra': '8000',
+                    'tropical-escape': '19000'
+                };
+                const price = prices[destination] || '0'; // Get price based on destination
+
+                // Build the URL with all the booking details
+                const redirectUrl = `/payment-page?destination=${destination}&source=${source}&date=${travelDate}&guests=${guests}&price=${price}`;
+
+                // Redirect the user to the payment page with all data
+                window.location.href = redirectUrl;
+            });
+        });
+    </script>
+</body>
+
+</html>

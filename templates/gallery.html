@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='gallery.css') }}" />
+</head>
+
+<body>
+
+    <section class="gallery" id="gallery">
+
+        <h1 class="heading">
+            <span>g</span>
+            <span>a</span>
+            <span>l</span>
+            <span>l</span>
+            <span>e</span>
+            <span>r</span>
+            <span>y</span>
+        </h1>
+
+        <p class="intro-text">
+            Explore breathtaking destinations through our curated gallery. Each image tells a unique story of adventure,
+            beauty, and culture. Scroll down to discover more!
+        </p>
+
+        <div class="box-container">
+
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/gallery/g-1.jpg') }}" alt="Mystic Hill Trails">
+                <div class="content">
+                    <h3>Mystic Hill Trails</h3>
+                    <p>Discover the serenity of foggy hills and untouched paths.</p>
+                    <a href="#" class="btn">see more</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/gallery/g-2.jpg') }}" alt="Canal in a historic town">
+                <div class="content">
+                    <h3>Romance by the Canal</h3>
+                    <p>Take an evening stroll through historic riverside towns.</p>
+                    <a href="#" class="btn">see more</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/gallery/g-3.jpg') }}" alt="Taj Mahal">
+                <div class="content">
+                    <h3>Marvel at the Taj Mahal</h3>
+                    <p>Witness the timeless beauty of love carved in white marble.</p>
+                    <a href="#" class="btn">see more</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/gallery/g-4.jpg') }}" alt="Tower Bridge in London">
+                <div class="content">
+                    <h3>London Bridge Vibes</h3>
+                    <p>Experience the grandeur and history of Tower Bridge.</p>
+                    <a href="#" class="btn">see more</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/gallery/g-5.jpg') }}" alt="Hiker on a mountain peak">
+                <div class="content">
+                    <h3>Conquer the Peak</h3>
+                    <p>Embrace adventure as you hike toward panoramic glory.</p>
+                    <a href="#" class="btn">see more</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/gallery/g-6.jpg') }}" alt="Volcano reflecting in water">
+                <div class="content">
+                    <h3>Volcanic Tranquility</h3>
+                    <p>Gaze upon nature's perfect symmetry by the calm waters.</p>
+                    <a href="#" class="btn">see more</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/gallery/g-7.jpg') }}" alt="Camera focusing on wildlife">
+                <div class="content">
+                    <h3>Lens on the Wild</h3>
+                    <p> Capture the essence of the wild through your lens.</p>
+                    <a href="#" class="btn"> see more</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/gallery/g-8.jpg') }}" alt="Luxury hotel by a river">
+                <div class="content">
+                    <h3>Riverside Royal Retreat</h3>
+                    <p> Stay in luxury amidst nature’s peaceful surroundings</p>
+                    <a href="#" class="btn">see more</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/gallery/g-9.jpg') }}" alt="Bungee jumping">
+                <div class="content">
+                    <h3>Bungee Jumping</h3>
+                    <p>Jump from high above with a rope tied to you. Feel the thrill as you fall safely toward the ground!</p>
+                    <a href="#" class="btn">see more</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/gallery/g-10.jpg') }}" alt="White water rafting">
+                <div class="content">
+                    <h3>White Water Rafting</h3>
+                    <p>Ride through fast-moving river water with a team. It's exciting, wet, and full of fun!</p>
+                    <a href="#" class="btn">see more</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/gallery/g-11.jpg') }}" alt="Hot air balloon">
+                <div class="content">
+                    <h3>Hot Air Balloon Ride</h3>
+                    <p>Fly high in the sky in a colorful balloon. See amazing views from up above!</p>
+                    <a href="#" class="btn">see more</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/gallery/g-12.jpg') }}" alt="Cliff jumping">
+                <div class="content">
+                    <h3>Cliff Jumping</h3>
+                    <p>Leap off a tall cliff with safety gear. It's a brave and thrilling adventure!</p>
+                    <a href="#" class="btn">see more</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const boxes = document.querySelectorAll(".gallery .box");
+
+            function isInViewport(el) {
+                const rect = el.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.9
+                );
+            }
+
+            function animateBoxes() {
+                boxes.forEach((box, index) => {
+                    if (isInViewport(box)) {
+                        box.style.animationName = "fadeInUp";
+                        box.style.setProperty("--delay", `${index * 0.1}s`);
+                        box.style.opacity = 1;
+                        box.style.transform = "none";
+                    }
+                });
+            }
+
+            window.addEventListener("scroll", animateBoxes);
+            animateBoxes(); 
+
+            // Back to Top button
+            const backToTop = document.createElement("div");
+            backToTop.id = "backToTop";
+            backToTop.innerHTML = "&#8679;";
+            document.body.appendChild(backToTop);
+
+            backToTop.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 300) {
+                    backToTop.style.display = "block";
+                } else {
+                    backToTop.style.display = "none";
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+</body>
+</html>

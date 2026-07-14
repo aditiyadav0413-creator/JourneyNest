@@ -1,0 +1,305 @@
+:root {
+    --orange: #ffa500;
+    --orange-light: rgba(255, 165, 0, 0.2);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f7f7f7;
+    color: #333;
+}
+
+/* Heading style (same as review/packages) */
+.heading {
+    text-align: center;
+    padding-bottom: 2rem;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.heading span {
+    font-size: 3.5rem;
+    background: var(--orange-light);
+    color: var(--orange);
+    border-radius: 0.5rem;
+    padding: 0.2rem 1rem;
+    margin: 0 0.2rem;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: default;
+}
+
+.heading span:hover {
+    background-color: #ffd27a;
+    transform: scale(1.1);
+}
+
+/* Booking Section */
+#book {
+    padding: 4rem 9%;
+    background-color: #fff;
+}
+
+#book .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#book .row .image {
+    flex: 1 1 400px;
+    max-width: 450px;
+}
+
+#book .row .image img {
+    width: 100%;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+#book .row form {
+    flex: 1 1 400px;
+    background: #fff;
+    padding: 2.5rem;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Labels and inputs */
+#book .row form h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    color: #444;
+    font-weight: 600;
+}
+
+#book .row form .inputBox {
+    margin-bottom: 1.5rem;
+}
+
+#book .row form input[type="text"],
+#book .row form input[type="number"],
+#book .row form input[type="date"] {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+#book .row form input[type="text"]:focus,
+#book .row form input[type="number"]:focus,
+#book .row form input[type="date"]:focus {
+    border-color: var(--orange);
+}
+
+/* Submit Button */
+.btn {
+    background: var(--orange);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    user-select: none;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #e59400;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #book .row {
+        flex-direction: column;
+    }
+
+    #book .row .image,
+    #book .row form {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .heading span {
+        font-size: 2.5rem;
+    }
+}
+
+/* Intro Text */
+.intro-text {
+    text-align: center;
+    max-width: 700px;
+    margin: 1rem auto 3rem auto;
+    font-size: 1.3rem;
+    color: #444;
+    font-weight: 500;
+    line-height: 1.6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: rgba(255, 165, 0, 0.1);
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(255, 165, 0, 0.15);
+    user-select: none;
+}
+
+/* Scroll Indicator Animation */
+.scroll-down {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.scroll-down span {
+    width: 8px;
+    height: 8px;
+    margin: 0 4px;
+    background: var(--orange);
+    border-radius: 50%;
+    animation: bounce 1.2s infinite alternate;
+}
+
+.scroll-down span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.scroll-down span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(10px); }
+}
+
+/* Testimonials & Other sections */
+.testimonials {
+    background-color: #fff;
+    padding: 3rem 9%;
+    text-align: center;
+}
+.testimonials h2 {
+    color: var(--orange);
+    margin-bottom: 1.5rem;
+}
+.carousel {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.carousel img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+.carousel img:hover {
+    transform: scale(1.05);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.hidden {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Back to Top Button */
+#backToTop {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    background: #f1c40f;
+    color: white;
+    padding: 0.8rem 1.2rem;
+    border-radius: 50%;
+    font-size: 2rem;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 165, 0, 0.7);
+    display: none;
+    z-index: 1000;
+    user-select: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#backToTop:hover {
+    background-color: #cc8400;
+    transform: scale(1.1);
+}
+
+
+/* === NEW STYLES FOR AIRPORT AUTOCOMPLETE === */
+
+.autocomplete-container {
+    position: relative;
+}
+
+.autocomplete-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none;
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.autocomplete-item, .autocomplete-item-none {
+    padding: 12px 15px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-item:hover {
+    background-color: #f7f7f7;
+}
+
+.autocomplete-item-none {
+    color: #888;
+    cursor: default;
+}
+
+.autocomplete-item small {
+    color: #666;
+    font-size: 0.85rem;
+}

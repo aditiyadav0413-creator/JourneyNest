@@ -1,0 +1,303 @@
+:root {
+  --orange: #ffa500;
+  --orange-light: rgba(255, 165, 0, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  color: #333;
+}
+
+.heading {
+  text-align: center;
+  padding-bottom: 2rem;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.heading span {
+  font-size: 3.5rem;
+  background: var(--orange-light);
+  color: var(--orange);
+  border-radius: 0.5rem;
+  padding: 0.2rem 1rem;
+  margin: 0 0.2rem;
+  display: inline-block;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: default;
+}
+
+.heading span:hover {
+  background-color: #ffd27a;
+  transform: scale(1.1);
+}
+
+.review {
+  padding: 4rem 9%;
+  background-color: #f7f7f7;
+}
+
+/* Swiper container */
+.review .review-slider {
+  padding: 2rem 0;
+}
+
+.review .box {
+  background: #fff;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.review .box img {
+  height: 13rem;
+  width: 13rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  border: 4px solid var(--orange);
+  transition: transform 0.3s ease;
+}
+
+.review .box img:hover {
+  transform: scale(1.05);
+}
+
+.review .box h3 {
+  color: #333;
+  font-size: 2.5rem;
+  text-transform: capitalize;
+  margin-bottom: 0.8rem;
+}
+
+.review .box p {
+  color: #666;
+  font-size: 1.5rem;
+  padding: 0 1rem 1.5rem;
+  line-height: 1.6;
+  min-height: 90px; /* keep text box height consistent */
+}
+
+.review .box .stars {
+  color: var(--orange);
+  font-size: 1.7rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .review {
+    padding: 3rem 5%;
+  }
+
+  .heading span {
+    font-size: 2.8rem;
+  }
+
+  .review .box p {
+    font-size: 1.3rem;
+  }
+}
+
+
+
+
+.review-intro-box {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  padding: 1rem 2rem;
+  background-color: #fff8ec;
+  border-left: 5px solid var(--orange);
+  border-radius: 8px;
+}
+
+.review-intro-box h2 {
+  font-size: 2.2rem;
+  color: var(--orange);
+  margin-bottom: 1rem;
+}
+
+.review-intro-box p {
+  font-size: 1.2rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.review-counter {
+  text-align: center;
+  margin-top: 3rem;
+  padding: 2rem;
+  background-color: #fffbe8;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.05);
+}
+
+.review-counter h3 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.review-counter p {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+
+.write-review-btn {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.btn-review {
+  background-color: var(--orange);
+  color: white;
+  font-size: 1.1rem;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-review:hover {
+  background-color: #e59400;
+}
+
+
+.review-separator {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--orange);
+  margin: 1rem 0;
+}
+
+
+
+
+/*back to top working*/
+#backToTop {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background: var(--orange);
+  color: white;
+  padding: 0.8rem 1.2rem;
+  border-radius: 50%;
+  font-size: 2rem;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.7);
+  display: none; /* hidden by default */
+  z-index: 1000;
+  user-select: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#backToTop:hover {
+  background-color: #cc8400;
+  transform: scale(1.1);
+}
+
+
+/* --- ✅ NEW CSS FOR FEEDBACK FORM --- */
+.feedback-form-container {
+    background: #fff;
+    padding: 3rem;
+    margin-top: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 1rem 2rem rgba(0,0,0,.1);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left; /* Align form content to the left */
+}
+
+.feedback-form-container h4 {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.feedback-form-container h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 2.5rem;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-family: Arial, sans-serif;
+}
+
+.feedback-form textarea {
+    resize: vertical;
+    height: 140px;
+}
+
+.feedback-form .rating-group {
+    margin-bottom: 1.5rem;
+}
+
+.feedback-form .rating-group p {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.rating-stars {
+    display: inline-block;
+    direction: rtl; /* Makes stars fill from right to left */
+}
+
+.rating-stars input[type="radio"] {
+    display: none; /* Hides the actual radio button circles */
+}
+
+.rating-stars label {
+    font-size: 2rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.rating-stars label:hover,
+.rating-stars label:hover ~ label,
+.rating-stars input[type="radio"]:checked ~ label {
+    color: #f8b400; /* Gold color for selected stars */
+}
+
+.feedback-form .submit-btn {
+    background-color: #FFA500; /* Teal color from screenshot */
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.feedback-form .submit-btn:hover {
+    background-color:  #E59400; /* Darker teal on hover */
+}

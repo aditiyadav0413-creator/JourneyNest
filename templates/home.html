@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JourneyNest - Home</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" />
+</head>
+
+<body>
+
+    <section class="home" id="home">
+
+        <h1 class="heading">
+            <span>H</span>
+            <span>O</span>
+            <span>M</span>
+            <span>E</span>
+        </h1>
+
+        <div class="home-intro-box">
+            <h2>Your Journey Begins Here</h2>
+            <p>Book, travel, and enjoy hassle-free trips with us.</p>
+            <p>Find the best spots for your next holiday and make memories for life.</p>
+        </div>
+
+        <section class="tour-highlights">
+            <div class="highlight">
+                <i class="fas fa-map-marked-alt"></i>
+                <h3>100+ Destinations</h3>
+                <p>From cities to hidden gems, explore the world your way.</p>
+            </div>
+            <div class="highlight">
+                <i class="fas fa-users"></i>
+                <h3>Trusted by Travelers</h3>
+                <p>Thousands of happy customers share their journeys with us.</p>
+            </div>
+            <div class="highlight">
+                <i class="fas fa-star"></i>
+                <h3>Top Rated Tours</h3>
+                <p>Handpicked experiences with the best guides and services.</p>
+            </div>
+        </section>
+
+        <section id="destinations" class="section">
+            <h2>Popular Destinations</h2>
+            <div class="cards">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/Destination/d1.jpg') }}" alt="Paris">
+                    <h3>Paris</h3>
+                    <p>The city of love, lights, and unforgettable memories.</p>
+                </div>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/Destination/d2.jpg') }}" alt="Maldives">
+                    <h3>Maldives</h3>
+                    <p>Crystal-clear waters, beaches, and tropical vibes.</p>
+                </div>
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/Destination/d3.jpg') }}" alt="New York">
+                    <h3>New York</h3>
+                    <p>The city that never sleeps – full of life and excitement.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="packages">
+            <h2>Popular Packages</h2>
+            <div class="cards">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/pack/pa1.jpg') }}" alt="Mumbai">
+                    <div class="card-content">
+                        <h3>Mumbai</h3>
+                        <p>Explore Mumbai's vibrant street life and historic architecture.</p>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <div class="price">₹7,000 <del>₹10,500</del></div>
+                    </div>
+                    <a href="/packages" class="btn">Book Now</a>
+                </div>
+
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/pack/pa2.jpg') }}" alt="Bali">
+                    <div class="card-content">
+                        <h3>Bali</h3>
+                        <p>Relax on beaches, explore temples, and enjoy vibrant nightlife.</p>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <div class="price">$12,000 <del>$18,000</del></div>
+                    </div>
+                    <a href="/packages" class="btn">Book Now</a>
+                </div>
+
+                <div class="card">
+                    <img src="{{ url_for('static', filename='images/pack/pa3.jpg') }}" alt="Paris">
+                    <div class="card-content">
+                        <h3>Paris</h3>
+                        <p>The city of love, fashion, and the iconic Eiffel Tower awaits you.</p>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                        <div class="price">₹20,000 <del>₹28,000</del></div>
+                    </div>
+                    <a href="/packages" class="btn">Book Now</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <h2>Why Choose Us?</h2>
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-plane"></i>
+                    <h3>Best Travel Deals</h3>
+                    <p>Affordable packages with luxury experience.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-hotel"></i>
+                    <h3>Comfortable Stays</h3>
+                    <p>Handpicked hotels & resorts for your comfort.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-headset"></i>
+                    <h3>24/7 Support</h3>
+                    <p>Our travel experts are always here to help you.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="newsletter" class="section-p1 section-m1">
+            <div class="newstext">
+                <h4>Subscribe to our Newsletter</h4>
+                <p>Get <span>travel updates</span> and <span>exclusive deals</span> directly in your inbox.</p>
+            </div>
+
+            <form id="newsletter-form" class="form">
+                <input type="email" id="email" placeholder="Enter your email" required>
+                <button type="submit" class="normal">Subscribe</button>
+            </form>
+        </section>
+    </section>
+
+    <script>
+        // Newsletter form functionality
+        document.getElementById("newsletter-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById("email");
+            const email = emailInput.value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailPattern.test(email)) {
+                alert("❌ Please enter a valid email address!");
+                return;
+            }
+            alert("✅ Thank you for subscribing! You'll receive travel updates soon.");
+            emailInput.value = "";
+        });
+
+        // Back to Top button
+        const backToTop = document.createElement("div");
+        backToTop.id = "backToTop";
+        backToTop.innerHTML = "&#8679;"; // up arrow
+        document.body.appendChild(backToTop);
+
+        backToTop.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                backToTop.style.display = "block";
+            } else {
+                backToTop.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>

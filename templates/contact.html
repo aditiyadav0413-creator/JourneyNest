@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='contact.css') }}">
+</head>
+<body>
+
+    <section class="contact" id="contact">
+        <h1 class="heading">
+            <span>C</span><span>o</span><span>n</span><span>t</span><span>a</span><span>c</span><span>t</span>
+        </h1>
+
+        <div class="contact-image">
+            <img src="https://cdn-icons-png.flaticon.com/512/201/201623.png" alt="Airplane over globe illustration" loading="lazy" />
+        </div>
+
+        <form action="/submit-contact" method="POST">
+            <div class="inputBox">
+                <input type="text" id="name" name="name" placeholder="Your Name" required autocomplete="name" />
+                <input type="email" id="email" name="email" placeholder="Your Email" required autocomplete="email" />
+            </div>
+
+            <div class="inputBox">
+                <input type="tel" id="number" name="number" placeholder="Your Phone Number" required autocomplete="tel" pattern="[0-9\s\-()+]+" title="Please enter a valid phone number" />
+                <input type="text" id="subject" name="subject" placeholder="Subject" required />
+            </div>
+
+            <textarea id="message" name="message" placeholder="Your Message" rows="6" required></textarea>
+
+            <input type="submit" class="btn" value="Send Message" />
+        </form>
+    </section>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("contactForm");
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault(); 
+            const formData = new FormData(form);
+
+            fetch('/send-message', {  // <-- This is the line causing the error
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('✅ ' + data.message);
+                form.reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('❌ Oops! Something went wrong. Please try again.');
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

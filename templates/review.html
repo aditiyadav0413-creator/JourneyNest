@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='review.css') }}" />
+</head>
+<body>
+
+    <section class="review" id="review">
+
+        <h1 class="heading">
+            <span>R</span><span>E</span><span>V</span><span>I</span><span>E</span><span>W</span>
+        </h1>
+
+        <div class="review-intro-box">
+            <h2>Your Words, Our Pride</h2>
+            <p>Thousands of happy travelers have shared their journeys with us. Read what they loved most — and let their experiences guide your next destination. ✈️</p>
+        </div>
+
+        <div class="swiper review-slider">
+            <div class="swiper-wrapper">
+
+                <div class="swiper-slide">
+                    <div class="box">
+                        <img src="{{ url_for('static', filename='images/review/pic1.png') }}" alt="Reviewer John Deo">
+                        <h3>John Deo</h3>
+                        <p>From mountains to beaches, they explored it all with us.<br>Read their honest reviews and unforgettable memories.</p>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="box">
+                        <img src="{{ url_for('static', filename='images/review/pic2.png') }}" alt="Reviewer Anna Kim">
+                        <h3>Anna Kim</h3>
+                        <p>Hear directly from our travelers about their adventures.<br>Real stories, real smiles, real experiences.</p>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="box">
+                        <img src="{{ url_for('static', filename='images/review/pic3.png') }}" alt="Reviewer Emily Carter">
+                        <h3>Emily Carter</h3>
+                        <p>Every review reflects a journey worth remembering.<br>Let their words inspire your next adventure with us.</p>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="box">
+                        <img src="{{ url_for('static', filename='images/review/pic8.png') }}" alt="Reviewer James Wilson">
+                        <h3>James Wilson</h3>
+                        <p>Every review reflects a journey worth remembering.<br>Let their words inspire your next adventure with us.</p>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="box">
+                        <img src="{{ url_for('static', filename='images/review/pic7.png') }}" alt="Reviewer Isha Nair">
+                        <h3>Isha Nair</h3>
+                        <p>They trusted us with their adventures — and loved the ride!<br>Check out what made their trips truly unforgettable.</p>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="review-counter">
+            <h3>🧳 500+ Happy Travelers</h3>
+            <p>Join the community of explorers who trust us for unforgettable travel experiences.</p>
+        </div>
+
+        <div class="write-review-btn">
+            <a href="/contact" class="btn-review">✍️ Write a Review</a>
+        </div>
+
+        <div class="review-separator">⭐ ⭐ ⭐</div>
+        <div class="feedback-form-container">
+            <h4>LEAVE FEEDBACK</h4>
+            <h2>Tell Us Your Experience</h2>
+            <form class="feedback-form" action="/submit-feedback" method="POST">
+                <input type="text" name="reviewer_name" placeholder="Your Name" required>
+                <input type="email" name="reviewer_email" placeholder="E-mail" required>
+                
+                <div class="rating-group">
+                    <p>Your Rating:</p>
+                    <div class="rating-stars">
+                        <input type="radio" id="star5" name="rating" value="5" required/><label for="star5" title="5 stars">★</label>
+                        <input type="radio" id="star4" name="rating" value="4"/><label for="star4" title="4 stars">★</label>
+                        <input type="radio" id="star3" name="rating" value="3"/><label for="star3" title="3 stars">★</label>
+                        <input type="radio" id="star2" name="rating" value="2"/><label for="star2" title="2 stars">★</label>
+                        <input type="radio" id="star1" name="rating" value="1"/><label for="star1" title="1 star">★</label>
+                    </div>
+                </div>
+
+                <textarea name="comments" placeholder="Your Comments" required></textarea>
+                
+                <button type="submit" class="submit-btn">Submit Feedback</button>
+            </form>
+        </div>
+        </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Your existing Swiper and Back-to-Top JavaScript
+        var swiper = new Swiper(".review-slider", {
+            spaceBetween: 20, loop: true, autoplay: { delay: 2500, disableOnInteraction: false },
+            breakpoints: { 640: { slidesPerView: 1 }, 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
+        });
+        const backToTop = document.createElement("div");
+        backToTop.id = "backToTop"; backToTop.innerHTML = "&#8679;"; document.body.appendChild(backToTop);
+        backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+        window.addEventListener("scroll", () => { backToTop.style.display = window.scrollY > 300 ? "block" : "none"; });
+    </script>
+
+</body>
+</html>

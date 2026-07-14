@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Packages</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='package.css') }}" />
+</head>
+<body>
+
+    <section class="packages" id="packages">
+
+        <h1 class="heading" id="packages-heading">
+            <span>P</span><span>A</span><span>C</span><span>K</span><span>A</span><span>G</span><span>E</span><span>S</span>
+        </h1>
+
+        <div class="packages-intro">
+            <h2>Explore Our Exclusive Travel Packages</h2>
+            <p>Choose your dream destination from our handpicked packages. Whether you want adventure, culture, or relaxation, we've got you covered!</p>
+        </div>
+
+        <div class="box-container">
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/package/p-1.jpg') }}" alt="Mumbai">
+                <div class="content">
+                    <h3><i class="fas fa-map-marker-alt"></i> Mumbai</h3>
+                    <p>Explore Mumbai's vibrant street life, historic architecture, and Bollywood glamour.</p>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <div class="price"> ₹7,500 <span>₹10,500</span></div>
+                    <a href="/booking-page?destination=mumbai" class="btn">book now</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/package/p-2.jpg') }}" alt="Sydney">
+                <div class="content">
+                    <h3><i class="fas fa-map-marker-alt"></i> Sydney</h3>
+                    <p>Discover Sydney's iconic Opera House, stunning beaches, and rich cultural experiences.</p>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <div class="price"> ₹15,000 <span>₹18,000</span></div>
+                    <a href="/booking-page?destination=sydney" class="btn">book now</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/package/p-3.jpg') }}" alt="Hawaii">
+                <div class="content">
+                    <h3><i class="fas fa-map-marker-alt"></i> Hawaii</h3>
+                    <p>Enjoy tropical beaches, volcanoes, and island culture in this adventurous getaway.</p>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></div>
+                    <div class="price"> ₹18,000 <span>₹25,000</span></div>
+                    <a href="/booking-page?destination=hawaii" class="btn">book now</a>
+                </div>
+            </div>
+            
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/package/p-4.jpg') }}" alt="Paris">
+                <div class="content">
+                    <h3> <i class="fas fa-map-marker-alt"></i> Paris</h3>
+                    <p>Experience romance and elegance in Paris with its world-famous Eiffel Tower and charming cafés.</p>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                    <div class="price"> ₹20,000 <span>₹28,000</span></div>
+                    <a href="/booking-page?destination=paris" class="btn">book now</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/package/p-5.jpg') }}" alt="Tokyo">
+                <div class="content">
+                    <h3> <i class="fas fa-map-marker-alt"></i> Tokyo</h3>
+                    <p>Enjoy Tokyo's mix of tradition and technology, from ancient temples to neon-lit streets.</p>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i></div>
+                    <div class="price"> ₹16,500 <span>₹20,000</span></div>
+                    <a href="/booking-page?destination=tokyo" class="btn">book now</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/package/p-6.jpg') }}" alt="Egypt">
+                <div class="content">
+                    <h3> <i class="fas fa-map-marker-alt"></i> Egypt</h3>
+                    <p>Uncover ancient wonders in Egypt, from the majestic pyramids of Giza to the vibrant bazaars of Cairo.</p>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                    <div class="price"> ₹22,000 <span>₹30,000</span></div>
+                    <a href="/booking-page?destination=egypt" class="btn">book now</a>
+                </div>
+            </div>
+            
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/package/p-10.jpeg') }}" alt="Bali">
+                <div class="content">
+                    <h3> <i class="fas fa-map-marker-alt"></i> Bali</h3>
+                    <p>Discover Bali's stunning beaches, vibrant rice terraces, and ancient temples on this paradise island.</p>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                    <div class="price"> ₹15,000 <span>₹17,000</span></div>
+                    <a href="/booking-page?destination=bali" class="btn">book now</a>
+                </div>
+            </div>
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/package/p-8.jpg') }}" alt="London">
+                <div class="content">
+                    <h3> <i class="fas fa-map-marker-alt"></i> London</h3>
+                    <p>Explore London’s historic charm featuring Big Ben, red buses, and world-class museums.</p>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                    <div class="price"> ₹24,000 <span>₹30,000</span></div>
+                    <a href="/booking-page?destination=london" class="btn">book now</a>
+                </div>
+            </div>
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/package/p-9.jpg') }}" alt="Agra">
+                <div class="content">
+                    <h3> <i class="fas fa-map-marker-alt"></i> Agra</h3>
+                    <p>Visit Agra to witness the majestic Taj Mahal, a symbol of love and architectural marvel.</p>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                    <div class="price"> ₹8,000 <span>₹11,000</span></div>
+                    <a href="/booking-page?destination=agra" class="btn">book now</a>
+                </div>
+            </div>
+            <div class="box">
+                <img src="{{ url_for('static', filename='images/package/p-10.jpg') }}" alt="Tropical beach">
+                <div class="content">
+                    <h3> <i class="fas fa-map-marker-alt"></i> Tropical Escape</h3>
+                    <p>Relax on pristine white sand beaches with crystal-clear waters and stunning rock formations.</p>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                    <div class="price"> ₹19,000 <span>₹25,000</span></div>
+                    <a href="/booking-page?destination=tropical-escape" class="btn">book now</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="load-more-container">
+            <button id="loadMoreBtn" class="btn">Load More Packages</button>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Back to Top button
+            const backToTop = document.createElement("div");
+            backToTop.id = "backToTop";
+            backToTop.innerHTML = "&#8679;";
+            document.body.appendChild(backToTop);
+            backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+            window.addEventListener("scroll", () => {
+                backToTop.style.display = window.scrollY > 300 ? "block" : "none";
+            });
+
+            // Animate packages on scroll
+            const boxes = document.querySelectorAll('.packages .box-container .box');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            boxes.forEach(box => {
+                box.classList.add('hidden');
+                observer.observe(box);
+            });
+
+            document.getElementById('loadMoreBtn').addEventListener('click', () => {
+                const hiddenBoxes = document.querySelectorAll('.packages .box-container .box:nth-child(n+7)');
+                hiddenBoxes.forEach(box => {
+                    box.style.display = 'block';
+                    box.classList.add('hidden');
+                    setTimeout(() => box.classList.add('visible'), 100);
+                });
+                document.getElementById('loadMoreBtn').style.display = 'none';
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+</body>
+</html>

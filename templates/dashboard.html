@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Dashboard - JourneyNest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        :root { --orange: #ffa500; }
+        body {
+            background: #f7f7f7;
+            font-family: Arial, sans-serif;
+            padding-top: 10rem;
+        }
+        .dashboard-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem 4rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1rem 2rem rgba(0,0,0,0.1);
+        }
+        .dashboard-container h2 {
+            font-size: 2.8rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        .dashboard-container h2 span {
+            color: var(--orange);
+        }
+        .dashboard-container > p {
+            font-size: 1.6rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+        .dashboard-container h3 {
+            font-size: 2.2rem;
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 2rem;
+            background: var(--orange);
+            color: #fff;
+            padding: .8rem 3rem;
+            border: .2rem solid var(--orange);
+            cursor: pointer;
+            font-size: 1.7rem;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover{
+            background: rgba(255, 165, 0, .2);
+            color: var(--orange);
+        }
+
+        /* --- NEW STYLES --- */
+        .dashboard-actions {
+            display: flex;
+            justify-content: space-around;
+            gap: 2rem;
+            text-align: center;
+        }
+        .action-card {
+            flex: 1;
+            padding: 2rem;
+            background: #fafafa;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.08);
+        }
+        .action-card i {
+            font-size: 3rem;
+            color: var(--orange);
+            margin-bottom: 1rem;
+        }
+        .action-card h4 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .action-card p {
+            font-size: 1.4rem;
+            color: #666;
+        }
+        .user-info p {
+            font-size: 1.6rem;
+            padding: 1rem 0;
+            color: #555;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .user-info p:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-actions {
+                flex-direction: column;
+            }
+            .dashboard-container {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Welcome, <span>{{ user_name }}!</span></h2>
+        <p>Manage your account and start your next adventure from here.</p>
+
+        <h3>Quick Actions</h3>
+        <div class="dashboard-actions">
+            <a href="{{ url_for('book') }}" class="action-card">
+                <i class="fas fa-plane-departure"></i>
+                <h4>Book a New Trip</h4>
+                <p>Find flights and start your journey.</p>
+            </a>
+            <a href="{{ url_for('packages') }}" class="action-card">
+                <i class="fas fa-box-open"></i>
+                <h4>Explore Packages</h4>
+                <p>Discover our curated travel deals.</p>
+            </a>
+            <a href="{{ url_for('contact') }}" class="action-card">
+                <i class="fas fa-headset"></i>
+                <h4>Contact Support</h4>
+                <p>Have questions? We're here to help.</p>
+            </a>
+        </div>
+
+        <h3>Account Information</h3>
+        <div class="user-info">
+            <p><strong>Name:</strong> {{ user_name }}</p>
+            <p><strong>Email:</strong> {{ session.user_email }}</p>
+        </div>
+        
+        <a href="{{ url_for('logout') }}" class="btn">Logout</a>
+    </div>
+</body>
+</html>
